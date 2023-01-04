@@ -1,0 +1,41 @@
+# 6Companies30DaysChallenge
+# 02_Question
+# LeetCode_216: Combination Sum III
+# Link: https://leetcode.com/problems/combination-sum-iii/description/
+# Submission Link: https://leetcode.com/problems/combination-sum-iii/submissions/870916412/
+
+
+
+class Solution(object):
+    def combinationSum3(self, k, n):
+        """
+        :type k: int
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        dp = []
+        result = []
+        curr = n
+        self.recMem(k,n,dp,result,1)
+        return result
+    def recMem(self,k,n,dp,result,temp):
+        
+        if(sum(dp)>n or len(dp)>k):
+            # print(dp,"\n")
+            return 0
+        elif(sum(dp) == n and len(dp) == k):
+            return 1
+
+        # dp.append(n)
+        for i in range(temp,n+1):
+            if(i>9):
+                break
+            dp.append(i)
+            res = self.recMem(k,n,dp,result,i+1)
+            
+            if(res == 1):
+                result.append(dp[:])
+            
+            dp.pop()
+
+
