@@ -1,0 +1,33 @@
+# 6Companies30DaysChallenge
+# 01_Question
+# Link: https://leetcode.com/problems/evaluate-reverse-polish-notation/
+# Submission: https://leetcode.com/problems/evaluate-reverse-polish-notation/submissions/871160598/
+# Contributed By: Mridul Bhaskar
+# Github: https://github.com/hacker626
+
+
+
+import math
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        operator = ["+","-","*","/"]
+        stack = []
+        totalSum = 0
+        for i in range(len(tokens)):
+            if(tokens[i] not in operator):
+                stack.append(int(tokens[i]))
+            else:
+                
+                num1 = stack.pop()
+                num2 = stack.pop()
+                if(tokens[i] == operator[0]):
+                    totalSum = num2+num1
+                elif(tokens[i] == operator[1]):
+                    totalSum = num2-num1
+                elif(tokens[i] == operator[2]):
+                    totalSum = num2*num1
+                else:
+                    totalSum = int(num2/num1)
+                stack.append(totalSum)   
+
+        return stack[-1] 
